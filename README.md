@@ -6,6 +6,7 @@ A website that allows users to add events to a daily planner and manage their ti
 ## Built With
 * HTML
 * CSS
+* JavaScript
 
 # Website
 https://millerdicarlo.github.io/c5-workDayScheduler/
