@@ -2,11 +2,41 @@
 var todayDate = moment().format('dddd, MMM Do YYYY');
 $("#currentDay").html(todayDate);
 
-// save button to save text
-var saveBtnE1 = document.createElement ("button");
-saveBtnE1.className = "saveBtn"
+$(document).ready(function () {
+    // save button  
+    $(".saveBtn").on("click", function () {
+        // Get nearby values of the description in JQuery
+        var text = $(this).siblings(".description").val();
+        var time = $(this).parent().attr("id");
 
-var saveBtnIcon = document.createElement("i");
-saveBtnIcon.className = "fa-solid fa-floppy-disk";
+        // Save in local storage
+        localStorage.setItem(time, text);
+    })
 
-saveBtnE1.appendChild(saveBtnIcon);
+    function timeTracker() {
+        //get current # of hours
+        var timeNow = moment().hour();
+
+        // loop over time blocks
+        $(".time-block").each(function () {
+            var blockTime = parseInt($(this).attr("id").split("hour")[1]);
+
+            // check the time/add classes
+            if (blockTime < timeNow) {
+                $(this).removeClass("future");
+                $(this).removeClass("present");
+                $(this).addClass("past");
+            }
+            else if (blockTime === timeNow) {
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+                $(this).addClass("present");
+            }
+            else {
+                $(this).removeClass("present");
+                $(this).removeClass("past");
+                $(this).addClass("future");
+
+            }
+        })
+    }
